@@ -1,10 +1,3 @@
-
-Save New Duplicate & Edit Just Text Twitter
-
-Save
-New
-Duplicate & Edit
-Just Text
 # Only imports required
 import os
 import time
@@ -12,6 +5,7 @@ import chess
 import pygame
 
 # Important global variables
+
 count = 1
 entry = "rthb"
 intialFile = ""
