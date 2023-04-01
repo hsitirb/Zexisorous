@@ -280,6 +280,42 @@ def clear():
 
 
 # Screen touch input
+def translate_mousepos_to_filrow(mouse_position):
+    if mouse_position[0] <= 100:
+        intialFile = "a"
+    if 200 >= mouse_position[0] > 100:
+        intialFile = "b"
+    if 300 >= mouse_position[0] > 200:
+        intialFile = "c"
+    if 400 >= mouse_position[0] > 300:
+        intialFile = "d"
+    if 500 >= mouse_position[0] > 400:
+        intialFile = "e"
+    if 600 >= mouse_position[0] > 500:
+        intialFile = "f"
+    if 700 >= mouse_position[0] > 600:
+        intialFile = "g"
+    if 800 >= mouse_position[0] > 700:
+        intialFile = "h"
+    if mouse_position[1] <= 100:
+        intialBoardrow = "8"
+    if 200 >= mouse_position[1] > 100:
+        intialBoardrow = "7"
+    if 300 >= mouse_position[1] > 200:
+        intialBoardrow = "6"
+    if 400 >= mouse_position[1] > 300:
+        intialBoardrow = "5"
+    if 500 >= mouse_position[1] > 400:
+        intialBoardrow = "4"
+    if 600 >= mouse_position[1] > 500:
+        intialBoardrow = "3"
+    if 700 >= mouse_position[1] > 600:
+        intialBoardrow = "2"
+    if 800 >= mouse_position[1] > 700:
+        intialBoardrow = "1"
+    return intialFile, intialBoardrow
+
+
 def screeninput():
     global intialFile
     global intialBoardrow
@@ -289,6 +325,7 @@ def screeninput():
     global destination
     orgin = ""
     destination = ""
+
     while True:
         for event1 in pygame.event.get():
             if event1.type == pygame.QUIT:
@@ -297,39 +334,10 @@ def screeninput():
                 if event1.button == 1:
                     mouse_position = event1.pos
                     print(mouse_position)
-                    if mouse_position[0] <= 100:
-                        intialFile = "a"
-                    if 200 >= mouse_position[0] > 100:
-                        intialFile = "b"
-                    if 300 >= mouse_position[0] > 200:
-                        intialFile = "c"
-                    if 400 >= mouse_position[0] > 300:
-                        intialFile = "d"
-                    if 500 >= mouse_position[0] > 400:
-                        intialFile = "e"
-                    if 600 >= mouse_position[0] > 500:
-                        intialFile = "f"
-                    if 700 >= mouse_position[0] > 600:
-                        intialFile = "g"
-                    if 800 >= mouse_position[0] > 700:
-                        intialFile = "h"
-                    if mouse_position[1] <= 100:
-                        intialBoardrow = "8"
-                    if 200 >= mouse_position[1] > 100:
-                        intialBoardrow = "7"
-                    if 300 >= mouse_position[1] > 200:
-                        intialBoardrow = "6"
-                    if 400 >= mouse_position[1] > 300:
-                        intialBoardrow = "5"
-                    if 500 >= mouse_position[1] > 400:
-                        intialBoardrow = "4"
-                    if 600 >= mouse_position[1] > 500:
-                        intialBoardrow = "3"
-                    if 700 >= mouse_position[1] > 600:
-                        intialBoardrow = "2"
-                    if 800 >= mouse_position[1] > 700:
-                        intialBoardrow = "1"
-                    orgin = str(intialFile)+str(intialBoardrow)
+
+                    intialFile, intialBoardrow = translate_mousepos_to_filerow(mouse_position)
+                    orgin = intialFile + intialBoardrow
+
                     print("orgin:"+orgin)
         if len(orgin) != 0:
             break
@@ -339,38 +347,7 @@ def screeninput():
                 if event1.button == 1:
                     mouse_position = event1.pos
                     print(mouse_position)
-                    if mouse_position[0] <= 100:
-                        finalFile = "a"
-                    if 200 >= mouse_position[0] > 100:
-                        finalFile = "b"
-                    if 300 >= mouse_position[0] > 200:
-                        finalFile = "c"
-                    if 400 >= mouse_position[0] > 300:
-                        finalFile = "d"
-                    if 500 >= mouse_position[0] > 400:
-                        finalFile = "e"
-                    if 600 >= mouse_position[0] > 500:
-                        finalFile = "f"
-                    if 700 >= mouse_position[0] > 600:
-                        finalFile = "g"
-                    if 800 >= mouse_position[0] > 700:
-                        finalFile = "h"
-                    if mouse_position[1] <= 100:
-                        finalBoardrow = "8"
-                    if 200 >= mouse_position[1] > 100:
-                        finalBoardrow = "7"
-                    if 300 >= mouse_position[1] > 200:
-                        finalBoardrow = "6"
-                    if 400 >= mouse_position[1] > 300:
-                        finalBoardrow = "5"
-                    if 500 >= mouse_position[1] > 400:
-                        finalBoardrow = "4"
-                    if 600 >= mouse_position[1] > 500:
-                        finalBoardrow = "3"
-                    if 700 >= mouse_position[1] > 600:
-                        finalBoardrow = "2"
-                    if 800 >= mouse_position[1] > 700:
-                        finalBoardrow = "1"
+                    finalFile, finalBoardrow = translate_mousepos_to_filerow(mouse_position)
                     destination = finalFile + finalBoardrow
                     print("Destination:"+destination)
         if len(str(orgin+"-"+destination)) == 6 or len(str(orgin+"-"+destination)) == 5:
@@ -496,26 +473,6 @@ while True:
             pygame.quit()
             exit()
     screen.fill((0, 0, 0))
-#    for i in range(1, 65):
-#        if i % 9 == 0:
-#            if alternate == True:
-#                pygame.draw.rect(screen, light_brown, rects[i-1])
-#            if alternate == False:
-#                pygame.draw.rect(screen, brown, rects[i - 1])
-#        elif i % 2 == 0:
-#            if alternate == True:
-#                alternate = False
-#                pygame.draw.rect(screen, brown, rects[i - 1])
-#            elif alternate == False:
-#                alternate = True
-#                pygame.draw.rect(screen, light_brown, rects[i - 1])
-#        else:
-#            if alternate == True:
-#                alternate = False
-#                pygame.draw.rect(screen, brown, rects[i - 1])
-#            elif alternate == False:
-#                alternate = True
-#                pygame.draw.rect(screen, light_brown, rects[i - 1])
 
     pygame.draw.rect(screen, light_brown, rects[0])
     pygame.draw.rect(screen, brown, rects[1])
