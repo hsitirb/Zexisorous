@@ -280,7 +280,7 @@ def clear():
 
 
 # Screen touch input
-def translate_mousepos_to_filrow(mouse_position):
+def translate_mousepos_to_filerow(mouse_position):
     if mouse_position[0] <= 100:
         intialFile = "a"
     if 200 >= mouse_position[0] > 100:
